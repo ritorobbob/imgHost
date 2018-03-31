@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Arduino Keyboard</title>
+  <style>
+    pre {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
+        }
+  </style>
+</head>
+<body>
+  <div>
+    <video controls>
+    <source src="encodedVid.mp4" type="video/mp4" width="400px" height="225px">
+    I'm sorry; your browser doesn't support HTML5 video in WebM with MP4 with H.264.
+    </video>
+  </div>
+  <div>
+    <div>
+      <p style="font-size: 20px">
+        The code:
+    </div>
+  <pre>
+  float notes[7];
+  float minor[] = {1, (float) 6 / 5, (float) 4 / 3, (float) 3 / 2, (float) 9 / 5, 2, (float) 12 / 5, (float) 8 / 3 };
+
+  void setup() {
+      Serial.begin(9600);
+  }
+  void loop() {
+    changeNote();
+    checkKeyPress();
+    Serial.println(analogRead(A5));
+  }
+  void checkKeyPress() {
+    int keyVal = analogRead(A5);
+    if(keyVal >= 5 && keyVal <= 10){
+      tone(8,notes[0]);
+    }
+    else if(keyVal >= 1000 && keyVal <= 1005){
+      tone(8,notes[1]);
+    }
+    else if(keyVal >= 645 && keyVal <= 655){
+      tone(8,notes[2]);
+    }
+    else if(keyVal >= 988 && keyVal <= 995){
+      tone(8,notes[3]);
+    }
+    else if(keyVal >= 692 && keyVal <= 700){
+      tone(8,notes[4]);
+    }
+    else if(keyVal >= 850 && keyVal <= 977){
+      tone(8,notes[5]);
+    }
+    else if(keyVal >= 500 && keyVal <= 515){
+      tone(8,notes[6]);
+    }
+    else if(keyVal == 1023){
+      tone(8,notes[7]);
+    }
+    else{
+      noTone(8);
+    }
+  }
+
+  void changeNote() {
+    notes[0] = ((analogRead(A0) + 100) * 0.8);
+    for(int i = 0; i < 8; i = i + 1){
+      notes[i] = notes[0] * minor[i];
+    }
+  }
+</pre>
+</div>
+</body>

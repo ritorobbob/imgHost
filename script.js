@@ -1,8 +1,8 @@
 
 function mouseOver() {
-    document.getElementById("logo").src="leadmilGifl.gif"
+    document.getElementById("logo-lossless").src="leadmilGifl.gif"
 }
 
 function mouseOut() {
-    document.getElementById("logo").src="Leadmill_logo_DarkGraySteel.png";
+    document.getElementById("logo-lossless").src="Leadmill_logo_DarkGraySteel.png";
 }
